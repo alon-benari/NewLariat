@@ -1,0 +1,18 @@
+{%extends "base_generic.html"%}
+
+{%block content%}
+<h1> Risk Stratification </h1>
+
+<form  method="POST"  > {%csrf_token%}>
+		
+	{% for field in form %}
+	<div class="form-group">
+		{{field.label_tag}} 
+		{{field}}
+		
+	</div>
+	{% endfor %}
+	<button type="submit" class="save btn btn-default">Save</button>  
+</form>
+
+{%endblock%}

@@ -1,0 +1,10 @@
+{%extends "base_generic.html"%}
+{%block content%}
+		
+<div class = "container">
+	<div class = "jumbotron">
+		{{contact_inf}}
+	</div>
+</div>	
+
+{%endblock%}
