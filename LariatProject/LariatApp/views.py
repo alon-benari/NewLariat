@@ -11,7 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 # Create your views here.
-
+@login_required
 def index(request):
     """
     A method to direct to the index home page of the application
@@ -19,6 +19,9 @@ def index(request):
     num_patients = Patient.objects.all().count()
     return render(request,'index.html',context={'num_patients': num_patients})
 
+
+
+@login_required
 def add_patient(request):
     """
     A method to render a form for adding patient details to the database
@@ -27,8 +30,6 @@ def add_patient(request):
     print('Getting the form')
     if request.method=="POST":
         form = PatientForm(request.POST)
-        print('Checking if ok')
-        print(form.is_valid())
         rai_list = ['age',
                     'snf',
                     'nephrologist',
@@ -46,14 +47,26 @@ def add_patient(request):
         print(utils.age_map(int(form.data['age']),int(form.data['cancer'])))
 
         print(features)
+        print('******')
         print(utils.get_rai(form))
+        rai = utils.get_rai(form)
+        print('******')
+
         if form.is_valid():
             form.save()
-            print('saving')
+            return render (request, 
+                           'show_rai.html', 
+                            context = {'rai':rai,
+                                      'Age':form.data['age'],
+                                      'FirstName': form.data['first_name'],
+                                      'LastName': form.data['last_name'],
+                                      'MiddleInit': form.data['middle_initial'],
+                                      'SSN':form.data['SSN']})
+            #print('saving')
             form = PatientForm()
     else:		
         form=PatientForm
-    return render(request, 'add_patient.html',{'form':form})
+        return render(request, 'add_patient.html',{'form':form})
 
 def contact_us(request):
     """
@@ -69,23 +82,7 @@ def about(request):
     about_text = "This is a cloud based application where Veterans may answer a screening questionnaire to the pre-operative clinic"
     return render(request,'about.html',context = {'about_text':about_text})
 
-
-def signup(request):
-    """
-    A method for a simple signup
-    """
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('index')
-    else:
-        form = UserCreationForm()
-    return render(request, 'signup.html', context = {'form': form})
+    
 
 def admin(request):
     """

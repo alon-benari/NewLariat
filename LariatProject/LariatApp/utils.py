@@ -46,7 +46,7 @@ def get_rai(form):
     co_morbid_vals = [5,6,4,4,8]
     co_morbid_score = sum([i[0]*i[1] for i in zip(co_morbid_features,co_morbid_vals)])
     #
-    snf_val = form.data['snf']*8
+    snf_score = int(form.data['snf'])*8
     #
     adl =  ['mobility','eating','toileting','hygiene']
     adl_score = sum([int(form.data[r]) for r in adl])

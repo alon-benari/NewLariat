@@ -1,8 +1,14 @@
-{% extends 'base.html'%}
+{% extends 'base_accounts.html'%}
 
 {%block content%}
+<div class = "container">
+	<h2>Sign Up</h2>
+	<form method="post">
+		{%csrf_token%}
+	     	{{form.as_p}}
+		{% include 'includes/form.html' %} 
+		<button type="submit"  >Create and account </button>
 
-
-
-
-{%end block%}
+	</form>
+</div>
+{%endblock%}

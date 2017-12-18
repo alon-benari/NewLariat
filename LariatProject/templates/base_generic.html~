@@ -24,9 +24,10 @@
  <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
 	  <li><a href="{%url 'add_patient' %}">Enter New Patient Information</a></li> 
-   	  <li><a href="{%url 'admin' %}">Enter New Patient Information</a></li> 
-	  <li><a href ="{%url 'contact_us'%}">contact us </a></li> 
-	  <li><a href ="{%url 'about'%}"> about </a></li> 
+   	  <li><a href="{%url 'admin' %}">Reporting</a></li> 
+	  <li><a href ="{%url 'Contact_us'%}">contact us </a></li> 
+	  <li><a href ="{%url 'About'%}"> About </a></li> 
+	  <li><a href ="{%url 'Logout'%}"> Logout </a></li> 
 
       </ul>
      {% endblock %}

@@ -4,13 +4,15 @@
 <h1> Registered Patient Information </h1>
 
 <!--form method="POST"  > {%csrf_token%}-->
-	<table class = "table table-bordered">
+	<table class = "table table-hover">
 	   <thead>
 		<tr>
 		 <th> FirstName </th>
 		 <th> LastName </th>
 		 <th> SSN </th>
-	         <th> CreaetedDate</th>
+	         <th> CreatedDate</th>
+	         
+		 <th> RAI</th>
 		</tr>
 	   </thead>
 	   <tbody>	
@@ -20,7 +22,9 @@
 		  <td>{{field.first_name}} </td>
 		  <td>{{field.last_name}} </td>
 		  <td>{{field.SSN}} </td>
-		  <td>{{field.created_date}} </td>		
+		  <td>{{field.created_by}}</td>
+		
+		  <td>{{field.rai}} </td>		
 		</tr>
 		</div>
 		{% endfor %}

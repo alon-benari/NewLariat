@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+<div class = "container">
+	<div class = "jumbotron">
+		
+		<h2>Results for the Risk Analysis Index score:</h2>
+
+		
+		
+
+
+		<p>Number of patients in the database:</p>
+		<ul>
+		  <li><strong>First Name:</strong>{{FirstName}} </li>
+		  <li><strong>Middle Initial:</strong>{{MiddleInit}} </li>
+		  <li><strong>Last Name:</strong>{{LastName}} </li>
+	          <li><strong>SSN:</strong>{{SSN}} </li>
+		  <li><strong>RAI:</strong> {{ rai }}</li>
+   
+		</ul>
+
+
+	</div>
+</div>	
+
+
+	
+
+{% endblock %}
+
