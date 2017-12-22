@@ -6,14 +6,16 @@ from django.urls import reverse
 from django.utils import timezone
 import uuid
 
+
+
 # Create your models here.
 class Patient(models.Model):
     """
     A method to represet fields for the screening questionnaire
     """
-    pid = models.UUIDField(primary_key=True,
-                           default=uuid.uuid4, 
-                           help_text="Unique ID ")
+    #pid = models.UUIDField(primary_key=True,
+    #                       default=uuid.uuid4, 
+    #                       help_text="Unique ID ")
     created_date = models.DateTimeField(default = timezone.now)
     first_name = models.CharField(max_length=50)
     middle_initial = models.CharField(max_length=2)
@@ -37,10 +39,11 @@ class Patient(models.Model):
     hygiene =  models.CharField(blank=True,default = 'no',max_length=3,help_text = 'personal hygiene')
     
     rai = models.IntegerField(default = 0,help_text = 'RAI')
-    #created_by = models.CharField(User.username, default = 'no', max_length =20)
+    created_by = models.CharField(User, null = True,default = '1', max_length =20)
     
     def save(self, *args, **kwargs):
         self.rai = self.get_rai()
+        #self.created_by = CuserMiddleware.get_user()
         super(Patient,self).save(*args, **kwargs)
    
     #

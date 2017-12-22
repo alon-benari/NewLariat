@@ -44,16 +44,18 @@ def add_patient(request):
                     'toileting',
                     'hygiene']
         features = [int(form.data[r]) for r in rai_list]
-        print(utils.age_map(int(form.data['age']),int(form.data['cancer'])))
+    
 
-        print(features)
-        print('******')
-        print(utils.get_rai(form))
+    
         rai = utils.get_rai(form)
-        print('******')
+
 
         if form.is_valid():
-            form.save()
+            data = form.save(commit=False)
+            data.created_by =  request.user
+            data.save()
+            
+            print(request.user)
             return render (request, 
                            'show_rai.html', 
                             context = {'rai':rai,
@@ -62,7 +64,7 @@ def add_patient(request):
                                       'LastName': form.data['last_name'],
                                       'MiddleInit': form.data['middle_initial'],
                                       'SSN':form.data['SSN']})
-            #print('saving')
+
             form = PatientForm()
     else:		
         form=PatientForm
